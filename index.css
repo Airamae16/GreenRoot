@@ -1,0 +1,48 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f4f9f4;
+  color: #1a3c1a;
+}
+
+header {
+  background-color: #007806;
+  color: white;
+  text-align: center;
+  padding: 25px 10px;
+}
+
+nav {
+  background-color: #1e5221;
+  text-align: center;
+  padding: 12px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #004e10;
+  border-radius: 5px;
+}
+
+.hero {
+  background: url('images/forest.jpg') center/cover no-repeat;
+  text-align: center;
+  padding: 100px 20px;
+  color: white;
+  font-size: 1.8rem;
+}
+
+footer {
+  background: #007806;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
