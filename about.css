@@ -1,0 +1,54 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f6fff4;
+  color: #123a12;
+}
+
+header {
+  background: #007806;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  background: #1e5221;
+  text-align: center;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 8px 15px;
+}
+
+nav a:hover,
+nav a.active {
+  background: #005d18;
+  border-radius: 5px;
+}
+
+.about-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #e9ffe9;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.about-section h2 {
+  color: #004f11;
+  text-align: center;
+}
+
+footer {
+  background: #007806;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: 30px;
+}
