@@ -1,0 +1,67 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: #f4fff5;
+}
+
+header {
+  background: #007806;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  background: #1e5221;
+  text-align: center;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a.active {
+  background: #004e10;
+  border-radius: 5px;
+}
+
+form {
+  max-width: 400px;
+  margin: 50px auto;
+  background: #e8ffe8;
+  padding: 25px;
+  border-radius: 10px;
+  border: 2px solid #007806;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+form input, form button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background: #007806;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #005d18;
+}
+
+footer {
+  background: #007806;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
