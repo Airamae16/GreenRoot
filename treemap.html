@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GreenRoots Tree Tracker Map</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+  <!-- Your main site stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Tree Tracker Page Styles -->
+  <link rel="stylesheet" href="treemap.css">
+</head>
+
+<body>
+  <!-- Site Header (same style as other pages) -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">🌱</div>
+        <div>
+          <div class="title">GreenRoots</div>
+          <div class="tagline">Planting a Greener Future</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="treemap.html" class="active">Tree Tracker</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Add Tree Form -->
+  <section class="add-tree-section">
+    <h3>Add a New Tree 🌳</h3>
+    <form id="addTreeForm">
+      <input id="tname" placeholder="Tree Site Name" required>
+      <input id="tdonor" placeholder="Donor Name" required>
+      <input id="tlat" placeholder="Latitude" required>
+      <input id="tlng" placeholder="Longitude" required>
+      <button type="submit">Add Tree</button>
+    </form>
+    <p class="tip">Tip: Click on the map to auto-fill latitude and longitude.</p>
+  </section>
+
+  <!-- Map Section -->
+  <div id="map"></div>
+
+  <!-- Tree Counter -->
+  <section class="tree-count">
+    Total Trees Planted: <strong><span id="treeCount">0</span></strong>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 GreenRoots | Growing a Greener Tomorrow 🌱</p>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Map JavaScript -->
+  <script>
+    const map = L.map('map').setView([12.8797, 121.7740], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    function loadTrees() {
+      const data = localStorage.getItem('greenroots_trees');
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveTrees(trees) {
+      localStorage.setItem('greenroots_trees', JSON.stringify(trees));
+    }
+
+    let treeData = loadTrees().length ? loadTrees() : [
+      { name: "Davao City", coords: [7.1907, 125.4553], donor: "Ella Cruz", date: "2025-03-14" },
+      { name: "Cebu City", coords: [10.3157, 123.8854], donor: "Marco Reyes", date: "2025-04-02" }
+    ];
+
+    const markers = L.layerGroup().addTo(map);
+
+    function refreshMarkers() {
+      markers.clearLayers();
+      treeData.forEach(tree => {
+        const marker = L.marker(tree.coords).addTo(markers);
+        marker.bindPopup(`
+          <b>🌱 ${tree.name}</b><br>
+          Donor: ${tree.donor}<br>
+          Date Planted: ${tree.date}
+        `);
+      });
+      document.getElementById('treeCount').textContent = treeData.length;
+    }
+
+    refreshMarkers();
+
+    document.getElementById('addTreeForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = tname.value.trim();
+      const donor = tdonor.value.trim();
+      const lat = parseFloat(tlat.value);
+      const lng = parseFloat(tlng.value);
+      if (!name || !donor || isNaN(lat) || isNaN(lng)) {
+        alert('Please fill all fields correctly.');
+        return;
+      }
+      const newTree = {
+        name,
+        donor,
+        coords: [lat, lng],
+        date: new Date().toISOString().slice(0, 10)
+      };
+      treeData.push(newTree);
+      saveTrees(treeData);
+      refreshMarkers();
+      addTreeForm.reset();
+      alert('Tree added successfully!');
+    });
+
+    map.on('click', e => {
+      tlat.value = e.latlng.lat.toFixed(6);
+      tlng.value = e.latlng.lng.toFixed(6);
+    });
+  </script>
+</body>
+</html>
